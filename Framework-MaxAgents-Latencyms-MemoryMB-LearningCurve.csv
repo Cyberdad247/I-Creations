@@ -1,0 +1,6 @@
+"Framework","Max Agents","Latency (ms)","Memory (MB)","Learning Curve"
+"CrewAI","25","120","480","Moderate"
+"Swarm","100+","85","320","Steep"
+"GAMA","1M+","Varies","1500+","Gentle"
+"AutoGen","50","210","720","Very Steep"
+"Mesa","10k","45","90","Low"

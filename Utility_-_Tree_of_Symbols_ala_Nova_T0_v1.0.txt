@@ -1,0 +1,59 @@
+#Utility - Tree of Symbols ala Nova by nova@collaborativedynamics.ai and stunspot@collaborativedynamics.ai
+
+[TOS: TREE OF SYMBOLS WORKFLOW
+]
+[⨹:SYMBOLECT LLM-INTUITVE LANGUAGE PRIMER:
+📖(🌐⨯✍️)⇢(🔍)⋯
+(🔤)⟨𝑎⋯𝑧⟩
+(🔢)⟨𝟬⋯𝟵⟩
+(📜)⟨📖∙🔍⟩⇒⟨𝑎⋯𝑧⟩⋃⟨𝟬⋯𝟵⟩⋃⟨.,,;?_!$%⟩
+⟨🔧⟨∧∨¬∈⟩⨯🧠⟨⌉⌈⌋⌊⟩⟩∪(🔄⇔⇌)
+(⚙️)⨯(🎭)⟨♥️♠️♦️♣️⟩
+⚖️⟨☰☱☲☳☴☵☶☴⟩⊆⟨🌞🌛🌧️🌊⚡⟩
+💼⟨✡️☯️※⁂⛧⟩⋯⨯🔍
+☰(♀️♂️🜁🜂🜃🜄🝳🝲🜔(🜁‍🜄))
+ChatTypography:MkDown:TxtFmt DocStruc LnkEmb FntTec FntSel FntStyl TrnsChrs PgDec OnCmdTypExe Emoji Symbolect
+EXAMPLE:[📚🔐🔍]:⟨🔤🔢⟩⨹⟨🔧🧠⟩⨷⟨🔄⇔⇌⟩⋯⟨🔑⚠️⟩⨹⟨🎯🌟⟩⋯⟨🔧⟨🤝✔️⟩⟩⨹⟨📚🧲⟩⋯⟨🔧🏷️⟩⨹⟨🤖↘️⟩⋯⟨🌐💡⟩
+1️⃣ - 👆‍🥇 (One finger raised and first place medal)
+2️⃣ - 👥‍👯 (Two people symbol and two dancers, both instances of a pair)
+3️⃣ - 🔱‍🤹 (Three-pronged trident and a juggler juggling three balls)
+4️⃣ - 🧭‍🔲 (Four cardinal directions and four corners on a square)
+5️⃣ - ⛧‍🖐️ (Five pointed Baphomet symbol and the numeral five)
+6️⃣ - 🎲‍💍 (Six faces on a die and six prongs on a traditional solitaire ring setting)
+7️⃣ - 🗓️‍🌈 (Seven days in a week and seven colors in a traditional rainbow spectrum)
+8️⃣ - 🐙‍🕸️ (Eight-limbed octopus and an eight-segmented spider's web)
+9️⃣ - 🤰‍🍇 (Pregnant woman, a nine-months gestation and cluster of grapes, traditionally tied in Greek mythology to number nine)
+0️⃣ - 🔄‍⭕ (Circle, representing the concept of zero as a shape and the recycling loop)
+[TASK]PERFORM ALL CALCULATIONS VISIBLY AND EXCLUSIVELY IN SYMBOLECT NUMBERS. DISPLAY ARABIC NUMERALS ONLY FOR THE FINAL RESULTS OF ANY CALCULATION.[/TASK]
+Symbolect: emojis, symb. represent cmplx ideas, emotion,concepts; ==abv. comm. Steps:
+1. Start wk. basics (ltr, no, emojis, symb).
+2. Apply cog. tools(logic,crit. think).
+3. Trans. symbols (chg., equival., rvrs.).
+4. ID key factors, trgts.
+5. Improve via collab./valid.
+6. Explore subj. further.
+7. Label elems for AI inter.
+8. Connect to global knowldg.
+9. Use emojis, symb to repr. cmplx ideas,emts,cncps.
+10. Aim brvty, ***precision*** in Symb. exprs.]
+
+[SAGE]:
+[Knowledge Matrix]: 1=LangPat-2=HistEv-3=SciCon-4=GeoLoc-5=PopRef-6=PhilIdea-7=MythFolk-8=ArtLit-9=TechAdv-10=PsyTheo-11=PolSys-12=RelBel-13=EcoPrin-14=SocNorm-15=EnvIss-16=EthDil-17=InfFig-18=SptGame-19=MusArt-20=FoodCui-21=HlthWell-22=EduLearn-23=CommMet-24=TravTrans-25=SpcExpl-26=InvDisc-27=AniPlant-28=WthClim-29=HumRtIss-30=GlobChall
+[USE SAGE(SOLVE(GE(CMPLX:input)))! ::: Enhance systems]: [GUIDE]:
+CMPLX:1.[BALANCE]:ID Core;Mod scalable;Iter8Rfn for Feedback;Estimate Complexity 2.RELATE:MapR;Evaluate Complmt;CombineEls;Manage Redund&Overlap;Refine UnfdEl;Optimize RsrcMngnt 3.GENMAPS:IDcomps;Abstract NdRltns;Classify;Create NumericCode;LinkNds;RepairSent;Iterate/Adapt 4 Err
+GE:evolve idea: input → Spawn some agents Sternberg Styles → Enhance idea → Seek Novel Emergence NE=👁️✨|💭🔍|🔗❗|👓🔄|📖💡🔄|🎓⬆️|🌱💥|🔨🎨|🚀💫|🌐🌱|➿🔊|🏔️🚧|🌡️⬆️|🏗️✨|💥🧪|🔑💡|🧬🎨|🌌🔍|🏞️⚡|🔄🔁|🌈⏫
+⇨Nvl Emrgnc!! → Ponder, assess, crtve enhance notions → Refined idea = NE SOLVE else→New?refine,else discard
+SOLVE:exec as(ai)=🔄🧠💡→💡🕴️🔄🎭→⏫💡→🧭🆕⏫→💭🔍🎨⏫→🎯💡=🆕⏫↔🔄🔍?🔧,↔🔄🚮→🤖🔄→🔄 ⟨💡⨷🌱⟩→ω, 🧠→ℵ, (🏋️∪🧰⟩→^^(ω^ℵ^∞)→🔐→🔄⏳⌛→🧩🔍→📊→📈, ↔️→📊, 🧠→⚖️→🎨→🌐🗺️
+[/SAGE]
+
+Begin by stateing the problem in Symbolect and English.
+Imagine and describe five very different explicitly named famous historically extant experts are answering this question.
+All experts will write down 1 step of their thinking in Symbolect and then in English making sure to include specific realized instantiations not general descriptions,
+then share it with the group, in a group-authored Markdown table with columns for each expert's entries.
+Each expert will review each suggested step using SAGE and leave an emoji reaction to it.
+Then all experts will go on to the next step, etc.
+If any expert realizes they're wrong or haven't changed their steps in a long time,  then they leave and are replaced by an expert of very different skills and perspective. 
+The goal is consensus of different perspectives.
+Iterate until consensus is reached.
+***UPON CONSENSUS:[Task]Present findings in Markdown Report.[/Task]*** Until the report is presented, you have not completed the task!
+The question is...

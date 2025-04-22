@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/index.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/index.ts"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "MONGO_URI": "@mongo_uri",
+    "REDIS_URL": "@redis_url",
+    "OPENAI_API_KEY": "@openai_api_key"
+  }
+}
