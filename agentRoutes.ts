@@ -87,14 +87,20 @@ router.post('/:id/process', async (req, res) => {
     // Apply error correction
     const correctedOutput = await AdvancedErrorCorrectionService.detectAndCorrectErrors(agentId, input, output);
     
-    // Log the interaction
+    // Extract provider/model for logging
+    const provider = agent.properties.find((p) => p.id === 'provider')?.value || 'openai';
+    const model = agent.properties.find((p) => p.id === 'model')?.value || 'gpt-3.5-turbo';
+    
+    // Log the interaction with provider/model in metadata
     await AgentLogModel.create({
       agentId,
       level: 'info',
       message: 'Successfully processed user request',
       metadata: { 
         input,
-        output: correctedOutput
+        output: correctedOutput,
+        provider,
+        model
       }
     });
     

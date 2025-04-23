@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import axios from 'axios';
 import { OpenAI } from 'langchain/llms/openai';
 import { PromptTemplate } from 'langchain/prompts';
 import { LLMChain } from 'langchain/chains';
@@ -24,29 +25,59 @@ class AgentOrchestrationService {
     };
   }
 
+  private async callProvider(provider: string, prompt: string, options: any = {}): Promise<string> {
+    switch (provider) {
+      case 'openai':
+        return await this.models[options.model || 'gpt-3.5-turbo'].call(prompt);
+      case 'ollama':
+        return (await axios.post(
+          `${process.env.OLLAMA_API_URL}/api/generate`,
+          { model: options.model || process.env.OLLAMA_MODEL, prompt }
+        )).data.response;
+      case 'grok':
+        return (await axios.post(
+          `${process.env.GROK_API_URL}/chat/completions`,
+          { prompt },
+          { headers: { Authorization: `Bearer ${process.env.GROK_API_KEY}` } }
+        )).data.choices[0].text;
+      case 'gemini':
+        return (await axios.post(
+          `${process.env.GEMINI_API_URL}/models/gemini-pro:generateContent?key=${process.env.GEMINI_API_KEY}`,
+          { contents: [{ parts: [{ text: prompt }] }] }
+        )).data.candidates[0].content.parts[0].text;
+      case 'openrouter':
+        return (await axios.post(
+          `${process.env.OPENROUTER_API_URL}/chat/completions`,
+          { model: options.model || 'openrouter-model', messages: [{ role: 'user', content: prompt }] },
+          { headers: { Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}` } }
+        )).data.choices[0].message.content;
+      case 'huggingface':
+        return (await axios.post(
+          `${process.env.HUGGINGFACE_API_URL}/${options.model || 'bigscience/bloom-560m'}`,
+          { inputs: prompt },
+          { headers: { Authorization: `Bearer ${process.env.HUGGINGFACE_API_KEY}` } }
+        )).data[0]?.generated_text || '';
+      case 'mistral':
+        return (await axios.post(
+          `${process.env.MISTRAL_API_URL}/chat/completions`,
+          { model: options.model || 'mistral-tiny', messages: [{ role: 'user', content: prompt }] },
+          { headers: { Authorization: `Bearer ${process.env.MISTRAL_API_KEY}` } }
+        )).data.choices[0].message.content;
+      default:
+        throw new Error(`Provider ${provider} not supported`);
+    }
+  }
+
   async processAgentRequest(agentId: string, input: string, agentConfig: any): Promise<string> {
     try {
-      // Select the appropriate model based on agent configuration
-      const modelName = agentConfig.properties.find((p: any) => p.id === 'model')?.value || 'gpt-3.5-turbo';
-      const model = this.models[modelName] || this.models['gpt-3.5-turbo'];
-      
-      // Create a prompt template based on agent type and configuration
+      // Select provider and model from agentConfig
+      const provider = agentConfig.properties.find((p: any) => p.id === 'provider')?.value || 'openai';
+      const model = agentConfig.properties.find((p: any) => p.id === 'model')?.value;
+      const agentName = agentConfig.properties.find((p: any) => p.id === 'name')?.value || 'Assistant';
       const template = this.getPromptTemplate(agentConfig.type);
-      
-      // Create a chain with the model and prompt template
-      const chain = new LLMChain({
-        llm: model,
-        prompt: template
-      });
-      
-      // Execute the chain with the input
-      const result = await chain.call({
-        input,
-        agentName: agentConfig.properties.find((p: any) => p.id === 'name')?.value || 'Assistant',
-        // Add any other variables needed by the prompt template
-      });
-      
-      return result.text;
+      const prompt = template.format({ agentName, input });
+      // Call the selected provider
+      return await this.callProvider(provider, prompt, { model });
     } catch (error) {
       console.error('Error processing agent request:', error);
       throw new Error('Failed to process agent request');
