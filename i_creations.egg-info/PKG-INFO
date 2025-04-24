@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: i_creations
+Version: 0.1
+Requires-Dist: fastapi
+Requires-Dist: uvicorn
+Requires-Dist: python-jose[cryptography]
+Requires-Dist: passlib
+Requires-Dist: python-multipart
+Dynamic: requires-dist

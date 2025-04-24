@@ -54,157 +54,40 @@ class OrchestrationEngine:
                 return True
         return False
     
-    def decompose_task(self, query: str) -> List[Dict[str, Any]]:
+    def decompose_task(self, query: str) -> list:
         """
-        Decompose a complex query into subtasks.
-        
-        Args:
-            query: The complex query to decompose
-            
-        Returns:
-            List[Dict]: A list of subtask dictionaries
+        Decompose a complex query into subtasks (stub implementation).
         """
-        # This is a simplified implementation
-        # In a real system, this would use NLP or other techniques to decompose the task
-        
-        # Example decomposition for demonstration purposes
-        subtasks = [
-            {
-                "id": str(uuid.uuid4()),
-                "name": f"Subtask 1 for {query}",
-                "description": f"First part of {query}",
-                "priority": "High"
-            },
-            {
-                "id": str(uuid.uuid4()),
-                "name": f"Subtask 2 for {query}",
-                "description": f"Second part of {query}",
-                "priority": "Medium"
-            }
-        ]
-        
-        return subtasks
-    
-    def select_agent(self, task: Dict[str, Any]) -> Optional[Any]:
+        # Example: split query by sentences as subtasks
+        return [{"id": str(uuid.uuid4()), "description": s.strip()} for s in query.split('.') if s.strip()]
+
+    def select_agent(self, task: dict, agents: list) -> object:
         """
-        Select the most appropriate agent for a task.
-        
-        Args:
-            task: The task dictionary
-            
-        Returns:
-            Optional[Any]: The selected agent, or None if no suitable agent is found
+        Select an agent for a given task (stub: pick first available).
         """
-        # This is a simplified implementation
-        # In a real system, this would use more sophisticated matching algorithms
-        
-        # For demonstration, just return the first agent if any exist
-        return self.agents[0] if self.agents else None
-    
-    def create_execution_plan(self, query: str) -> Dict[str, Any]:
+        for agent in agents:
+            if getattr(agent, 'status', None) == 'offline':
+                return agent
+        return None
+
+    def create_execution_plan(self, query: str, agents: list) -> dict:
         """
-        Create an execution plan for a complex query.
-        
-        Args:
-            query: The complex query to create a plan for
-            
-        Returns:
-            Dict: An execution plan dictionary
+        Create an execution plan for a query (stub implementation).
         """
-        execution_id = str(uuid.uuid4())
         subtasks = self.decompose_task(query)
-        
-        # Create a dependency graph (simplified for demonstration)
-        dependencies = {}
-        if len(subtasks) > 1:
-            dependencies[subtasks[1]["id"]] = [subtasks[0]["id"]]
-        
-        execution_plan = {
-            "id": execution_id,
-            "query": query,
-            "subtasks": subtasks,
-            "dependencies": dependencies,
-            "status": "Created",
-            "created_at": datetime.now().isoformat(),
-            "updated_at": datetime.now().isoformat()
-        }
-        
-        # Store the execution plan
-        self.active_executions[execution_id] = execution_plan
-        
-        return execution_plan
-    
-    def execute_plan(self, execution_id: str) -> Dict[str, Any]:
+        plan = {"id": str(uuid.uuid4()), "subtasks": []}
+        for subtask in subtasks:
+            agent = self.select_agent(subtask, agents)
+            plan["subtasks"].append({"task": subtask, "agent": agent.id if agent else None})
+        return plan
+
+    def execute_plan(self, plan: dict) -> dict:
         """
-        Execute an existing execution plan.
-        
-        Args:
-            execution_id: The ID of the execution plan to execute
-            
-        Returns:
-            Dict: The results of the execution
+        Execute a plan (stub: mark all subtasks as complete).
         """
-        if execution_id not in self.active_executions:
-            raise ValueError(f"Execution plan {execution_id} not found")
-        
-        execution_plan = self.active_executions[execution_id]
-        execution_plan["status"] = "In Progress"
-        execution_plan["updated_at"] = datetime.now().isoformat()
-        
-        results = {}
-        completed_tasks = set()
-        
-        # Process subtasks in order of dependencies
-        for subtask in execution_plan["subtasks"]:
-            subtask_id = subtask["id"]
-            
-            # Check if this subtask depends on other subtasks
-            if subtask_id in execution_plan["dependencies"]:
-                dependencies = execution_plan["dependencies"][subtask_id]
-                if not all(dep in completed_tasks for dep in dependencies):
-                    # Skip this subtask for now as its dependencies aren't met
-                    continue
-            
-            # Select an agent for this subtask
-            agent = self.select_agent(subtask)
-            
-            if agent:
-                # Simulate agent execution (in a real system, this would call the agent)
-                result = f"Result for {subtask['name']} by {agent.name}"
-                results[subtask_id] = {
-                    "subtask": subtask,
-                    "agent_id": agent.id,
-                    "result": result,
-                    "status": "Completed",
-                    "completed_at": datetime.now().isoformat()
-                }
-                completed_tasks.add(subtask_id)
-            else:
-                results[subtask_id] = {
-                    "subtask": subtask,
-                    "agent_id": None,
-                    "result": None,
-                    "status": "Failed",
-                    "error": "No suitable agent found"
-                }
-        
-        # Update execution plan status
-        if len(completed_tasks) == len(execution_plan["subtasks"]):
-            execution_plan["status"] = "Completed"
-        elif len(completed_tasks) > 0:
-            execution_plan["status"] = "Partially Completed"
-        else:
-            execution_plan["status"] = "Failed"
-        
-        execution_plan["results"] = results
-        execution_plan["updated_at"] = datetime.now().isoformat()
-        execution_plan["completed_at"] = datetime.now().isoformat()
-        
-        # Move from active to history
-        self.execution_history.append(execution_plan)
-        del self.active_executions[execution_id]
-        
-        return execution_plan
+        for sub in plan.get("subtasks", []):
+            sub["status"] = "completed"
+        return {"plan_id": plan["id"], "result": "all subtasks completed"}
     
     def get_execution_status(self, execution_id: str) -> Dict[str, Any]:
         """

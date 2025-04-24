@@ -323,6 +323,54 @@ class DataStorage:
         self.metadata[key] = value
         self.updated_at = datetime.now()
     
+    def store_assignment(self, assignment: Any) -> None:
+        """
+        Store an assignment persistently.
+        """
+        if not hasattr(self, 'assignment_repository'):
+            self.assignment_repository = {}
+        self.assignment_repository[assignment.id] = assignment
+        self.updated_at = datetime.now()
+        self._save_to_file("assignments", assignment.id, assignment.to_dict())
+
+    def get_assignment(self, assignment_id: str) -> Optional[Any]:
+        """
+        Retrieve an assignment by ID.
+        """
+        if hasattr(self, 'assignment_repository') and assignment_id in self.assignment_repository:
+            return self.assignment_repository[assignment_id]
+        data = self._load_from_file("assignments", assignment_id)
+        if data:
+            from assignment import Assignment
+            assignment = Assignment.from_dict(data)
+            if not hasattr(self, 'assignment_repository'):
+                self.assignment_repository = {}
+            self.assignment_repository[assignment_id] = assignment
+            return assignment
+        return None
+
+    def list_assignments(self) -> List[Any]:
+        """
+        List all assignments.
+        """
+        if not hasattr(self, 'assignment_repository'):
+            self.assignment_repository = {}
+        ids = self._list_files("assignments")
+        assignments = []
+        for assignment_id in ids:
+            assignment = self.get_assignment(assignment_id)
+            if assignment:
+                assignments.append(assignment)
+        return assignments
+
+    def delete_assignment(self, assignment_id: str) -> bool:
+        """
+        Delete an assignment by ID.
+        """
+        if hasattr(self, 'assignment_repository') and assignment_id in self.assignment_repository:
+            del self.assignment_repository[assignment_id]
+        return self._delete_file("assignments", assignment_id)
+    
     def _save_to_file(self, category: str, item_id: str, data: Dict[str, Any]) -> bool:
         """
         Save data to a file.

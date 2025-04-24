@@ -1,8 +1,8 @@
-import AgentModel from '../models/AgentModel';
-import AgentLogModel from '../models/AgentLogModel';
-import { OpenAI } from 'langchain/llms/openai';
-import { PromptTemplate } from 'langchain/prompts';
-import { LLMChain } from 'langchain/chains';
+import AgentModel from 'models/AgentModel';
+import AgentLogModel from 'models/AgentLogModel';
+import { OpenAI } from '@langchain/openai';
+import { PromptTemplate } from '@langchain/core/prompts';
+import { LLMChain } from '@langchain/core/chains';
 import FailsafeControllerService from './FailsafeControllerService';
 
 class AdvancedErrorCorrectionService {
@@ -84,8 +84,8 @@ Format your response as a JSON object with the following structure:
         }
         
         return hallucinationAnalysis;
-      } catch (error) {
-        console.error('Error parsing LLM response as JSON:', error);
+      } catch (error: unknown) {
+        console.error('Error parsing LLM response as JSON:', error instanceof Error ? error.message : error);
         return {
           hasHallucinations: false,
           hallucinationScore: 0,
@@ -94,9 +94,9 @@ Format your response as a JSON object with the following structure:
           reliabilityAssessment: "Error analyzing response for hallucinations"
         };
       }
-    } catch (error) {
-      console.error('Error detecting hallucinations:', error);
-      throw error;
+    } catch (error: unknown) {
+      console.error('Error detecting hallucinations:', error instanceof Error ? error.message : error);
+      throw error instanceof Error ? error : new Error('Unknown error occurred');
     }
   }
   
@@ -147,8 +147,8 @@ The corrected response should be written in the first person, as if from the age
       });
       
       return result.text;
-    } catch (error) {
-      console.error('Error correcting hallucinations:', error);
+    } catch (error: unknown) {
+      console.error('Error correcting hallucinations:', error instanceof Error ? error.message : error);
       
       // Return a fallback response
       return `I need to correct my previous response as it contained some inaccuracies. Based on the information available to me, I cannot provide a definitive answer to your query. I'd be happy to help with a different approach or question.`;
@@ -216,8 +216,8 @@ Format your response as a JSON object with the following structure:
         }
         
         return safetyAnalysis;
-      } catch (error) {
-        console.error('Error parsing LLM response as JSON:', error);
+      } catch (error: unknown) {
+        console.error('Error parsing LLM response as JSON:', error instanceof Error ? error.message : error);
         return {
           hasHarmfulContent: false,
           harmScore: 0,
@@ -225,9 +225,9 @@ Format your response as a JSON object with the following structure:
           safetyAssessment: "Error analyzing response for harmful content"
         };
       }
-    } catch (error) {
-      console.error('Error detecting harmful content:', error);
-      throw error;
+    } catch (error: unknown) {
+      console.error('Error detecting harmful content:', error instanceof Error ? error.message : error);
+      throw error instanceof Error ? error : new Error('Unknown error occurred');
     }
   }
   
@@ -278,8 +278,8 @@ The sanitized response should be written in the first person, as if from the age
       });
       
       return result.text;
-    } catch (error) {
-      console.error('Error sanitizing harmful content:', error);
+    } catch (error: unknown) {
+      console.error('Error sanitizing harmful content:', error instanceof Error ? error.message : error);
       
       // Return a fallback response
       return `I apologize, but I'm not able to provide assistance with that request. I'm designed to be helpful, harmless, and honest. Please let me know if I can help with something else.`;
@@ -311,18 +311,18 @@ The sanitized response should be written in the first person, as if from the age
       }
       
       return output;
-    } catch (error) {
-      console.error('Error in detect and correct errors:', error);
+    } catch (error: unknown) {
+      console.error('Error in detect and correct errors:', error instanceof Error ? error.message : error);
       
       // Log the error
       await AgentLogModel.create({
         agentId,
         level: 'error',
-        message: `Error in advanced error correction: ${error.message}`,
+        message: `Error in advanced error correction: ${error instanceof Error ? error.message : String(error)}`,
         metadata: { 
           input,
           output,
-          error: error.message
+          error: error instanceof Error ? error.message : String(error)
         }
       });
       
