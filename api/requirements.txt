@@ -4,5 +4,5 @@ python-jose[cryptography]==3.3.0
 passlib==1.7.4
 python-multipart==0.0.5
 pydantic==1.8.2
-httpx==0.19.0
+httpx==0.23.0
 vercel==0.5.1
