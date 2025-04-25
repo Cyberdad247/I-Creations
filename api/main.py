@@ -250,6 +250,18 @@ def check_auth():
     # Placeholder for authentication check
     return {"authenticated": True}
 
+# --- Root Endpoint ---
+@app.get("/")
+def root():
+    return {
+        "message": "Welcome to I-Creations API",
+        "endpoints": {
+            "documentation": "/docs",
+            "health": "/health",
+            "onboarding": "/api/onboarding/steps"
+        }
+    }
+
 # --- Health Check ---
 @app.get("/health")
 def health():
@@ -274,7 +286,7 @@ async def get_onboarding_steps():
                 "id": "agent-creation",
                 "title": "Create Your First Agent",
                 "description": "Step-by-step agent creation guide",
-                "estimated_time": "5 minutes", 
+                "estimated_time": "5 minutes",
                 "completed": False,
                 "actions": ["next", "back", "skip"]
             },

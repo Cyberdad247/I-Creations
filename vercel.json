@@ -2,18 +2,23 @@
   "version": 2,
   "builds": [
     {
-      "src": "src/index.ts",
-      "use": "@vercel/node"
+      "src": "api/main.py",
+      "use": "@vercel/python",
+      "config": { 
+        "maxLambdaSize": "15mb",
+        "runtime": "python3.9"
+      }
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "src/index.ts"
+      "dest": "api/main.py"
     }
   ],
   "env": {
     "NODE_ENV": "production",
+    "PYTHONPATH": "/var/task/api",
     "MONGO_URI": "@mongo_uri",
     "REDIS_URL": "@redis_url",
     "OPENAI_API_KEY": "@openai_api_key"
