@@ -27,6 +27,27 @@ I-Creations is a full-stack platform for:
 ---
 
 ## Installation & Deployment
+---
+
+**Frontend-Backend Integration:**
+The frontend (Next.js in `/frontend`) is now connected to the backend API (`/backend/fastapi`). Key integration points:
+
+- Agent CRUD operations (create, read, update, delete)
+- Tools management (configure and assign tools to agents) — **fully integrated**
+- Memory configuration (view and edit agent memory settings) — **fully integrated**
+- Settings management (update agent parameters) — *UI/backend integration pending*
+
+Configuration:
+1. Set `NEXT_PUBLIC_BACKEND_URL` in `.env` (e.g., `NEXT_PUBLIC_BACKEND_URL=http://localhost:8000`)
+2. All API calls use axios with proper error handling
+3. Loading states implemented for all async operations
+4. TypeScript types shared between frontend and backend
+
+The following frontend pages are connected:
+- `/agent-tools` - Manage agent tools (API connected)
+- `/agent-memory` - Configure agent memory (API connected)
+- `/agent-settings` - Update agent settings (**pending**)
+---
 
 ### Local Development
 1. **Clone the repository:**

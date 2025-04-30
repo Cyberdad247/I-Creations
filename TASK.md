@@ -34,6 +34,16 @@
    - Add API references
    - Enhance README.md
 
+5. Integrate and Connect Frontend (from agent-platform)
+    - [x] Update frontend Agent list component to fetch from backend
+    - [x] Update frontend Agent detail view
+    - [x] Add environment variable NEXT_PUBLIC_BACKEND_URL to .env
+    - [x] Configure frontend to use backend API base URL
+    - [x] Document integration steps in README.md
+    - [x] Connect Agent Tools management UI to backend
+    - [x] Connect Agent Memory configuration UI to backend
+    - [ ] Implement Agent Settings configuration UI and connect to backend API (pending)
+
 ## Component Implementation Order
 1. Complete Button component
 2. Implement Card component
@@ -46,3 +56,5 @@
 - Tests pass with minimum 90% coverage
 - Prettier formatting applied
 - Code review required for all changes
+
+- [x] Set up initial monorepo structure and migrate code

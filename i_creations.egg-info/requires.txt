@@ -1,5 +1,4 @@
-fastapi
-uvicorn
-python-jose[cryptography]
-passlib
-python-multipart
+fastapi>=0.68.0
+sqlalchemy>=1.4.0
+aiosqlite>=0.17.0
+pytest-asyncio>=0.17.0
