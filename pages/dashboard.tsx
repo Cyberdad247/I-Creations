@@ -1,9 +1,19 @@
-import React from 'react';
+import { useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import Layout from '../Layout';
 import { motion } from 'framer-motion';
+import { isAuthenticated } from '../services/auth';
 
 const DashboardPage: React.FC = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!isAuthenticated()) {
+      router.push('/login');
+    }
+  }, [router]);
+
   // Example gaming-style UI: leaderboard, achievements, and stats
   return (
     <Layout>

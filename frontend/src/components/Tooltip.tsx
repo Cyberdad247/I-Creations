@@ -15,7 +15,7 @@ export const Tooltip = ({
   placement = 'top',
   showDelay = 300,
   hideDelay = 150,
-  enabled = true
+  enabled = true,
 }: TooltipProps) => {
   const [visible, setVisible] = useState(false);
   const timeoutRef = useRef<number>();
@@ -36,7 +36,7 @@ export const Tooltip = ({
   };
 
   return (
-    <div 
+    <div
       ref={wrapperRef}
       className="tooltip-wrapper"
       onMouseEnter={handleMouseEnter}

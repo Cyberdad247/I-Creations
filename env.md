@@ -1,82 +1,61 @@
-# Environment Variables for Agent Creation Platform
+# Environment Variables
 
-## Frontend Environment Variables
-NEXT_PUBLIC_API_URL=https://agent-platform-backend.vercel.app
+This document outlines the environment variables required to run the I-Creations project, covering both the FastAPI backend and the Next.js frontend.
 
-## Backend Environment Variables
-NODE_ENV=production
-MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/agent_platform
-REDIS_URL=redis://<username>:<password>@<host>:<port>
-OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxx
-OLLAMA_API_URL=http://localhost:11434
-OLLAMA_MODEL=llama3
-GROK_API_KEY=your_grok_api_key
-GROK_API_URL=https://api.grok.com/v1
-GEMINI_API_KEY=your_gemini_api_key
-GEMINI_API_URL=https://generativelanguage.googleapis.com/v1beta
-OPENROUTER_API_KEY=your_openrouter_api_key
-OPENROUTER_API_URL=https://openrouter.ai/api/v1
-HUGGINGFACE_API_KEY=your_huggingface_api_key
-HUGGINGFACE_API_URL=https://api-inference.huggingface.co/models
-MISTRAL_API_KEY=your_mistral_api_key
-MISTRAL_API_URL=https://api.mistral.ai/v1
-PORT=5000
+## Project Root (`.env` file)
 
-## Instructions for Setting Up Environment Variables in Vercel
+It is recommended to use a `.env` file at the project root to manage environment variables for local development.
 
-### Backend Deployment
-1. Create a new project in Vercel and link it to your backend repository
-2. Go to Settings > Environment Variables
-3. Add the following environment variables:
-   - MONGO_URI: Your MongoDB connection string
-   - REDIS_URL: Your Redis connection string
-   - OPENAI_API_KEY: Your OpenAI API key
-   - OLLAMA_API_URL: URL for Ollama API
-   - OLLAMA_MODEL: Model name for Ollama
-   - GROK_API_KEY: Your Grok API key
-   - GROK_API_URL: URL for Grok API
-   - GEMINI_API_KEY: Your Gemini API key
-   - GEMINI_API_URL: URL for Gemini API
-   - OPENROUTER_API_KEY: Your OpenRouter API key
-   - OPENROUTER_API_URL: URL for OpenRouter API
-   - HUGGINGFACE_API_KEY: Your HuggingFace API key
-   - HUGGINGFACE_API_URL: URL for HuggingFace API
-   - MISTRAL_API_KEY: Your Mistral API key
-   - MISTRAL_API_URL: URL for Mistral API
-   - PORT: Port number for the backend
-4. Deploy the project
+```dotenv
+# FastAPI Backend
+# Database URL for the backend.
+# Example for SQLite: sqlite:///./sql_app.db
+# Example for PostgreSQL: postgresql://user:password@host:port/database
+DATABASE_URL=sqlite:///./sql_app.db
 
-### Frontend Deployment
-1. Create a new project in Vercel and link it to your frontend repository
-2. Go to Settings > Environment Variables
-3. Add the following environment variable:
-   - NEXT_PUBLIC_API_URL: URL of your deployed backend (e.g., https://agent-platform-backend.vercel.app)
-4. Deploy the project
+# Secret key for JWT token generation.
+# **IMPORTANT:** Change this to a strong, unique secret in production.
+SECRET_KEY=your-secret-key
 
-## Local Development Environment Variables
+# Algorithm for JWT token generation.
+ALGORITHM=HS256
 
-Create a `.env` file in the backend directory with the following variables:
-```
-NODE_ENV=development
-MONGO_URI=mongodb://localhost:27017/agent_platform
-REDIS_URL=redis://localhost:6379
-OPENAI_API_KEY=your_openai_api_key
-OLLAMA_API_URL=http://localhost:11434
-OLLAMA_MODEL=llama3
-GROK_API_KEY=your_grok_api_key
-GROK_API_URL=https://api.grok.com/v1
-GEMINI_API_KEY=your_gemini_api_key
-GEMINI_API_URL=https://generativelanguage.googleapis.com/v1beta
-OPENROUTER_API_KEY=your_openrouter_api_key
-OPENROUTER_API_URL=https://openrouter.ai/api/v1
-HUGGINGFACE_API_KEY=your_huggingface_api_key
-HUGGINGFACE_API_URL=https://api-inference.huggingface.co/models
-MISTRAL_API_KEY=your_mistral_api_key
-MISTRAL_API_URL=https://api.mistral.ai/v1
-PORT=5000
+# Access token expiration time in minutes.
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+
+# Next.js Frontend
+# Public URL for the backend API.
+NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
+
+# Placeholder for production secrets (e.g., Supabase secrets)
+# In a production environment, sensitive variables like DATABASE_URL and SECRET_KEY
+# should be loaded from a secure source (e.g., Supabase secrets, Kubernetes secrets, etc.)
+# SUPABASE_URL=your_supabase_url
+# SUPABASE_KEY=your_supabase_key
+# EXTERNAL_API_KEY=your_external_api_key
 ```
 
-Create a `.env.local` file in the frontend directory with the following variables:
-```
-NEXT_PUBLIC_API_URL=http://localhost:5000
-```
+## Backend (FastAPI)
+
+The FastAPI backend uses `pydantic-settings` to load configuration from environment variables, with fallback to a `.env` file.
+
+Required variables:
+*   `DATABASE_URL`: Connection string for the database.
+*   `SECRET_KEY`: Secret key for JWT.
+*   `ALGORITHM`: JWT algorithm.
+*   `ACCESS_TOKEN_EXPIRE_MINUTES`: JWT expiration time.
+
+Sensitive variables (`DATABASE_URL`, `SECRET_KEY`) should be managed securely in production.
+
+## Frontend (Next.js)
+
+The Next.js frontend accesses environment variables via `process.env`. Public variables must be prefixed with `NEXT_PUBLIC_`.
+
+Required variables:
+*   `NEXT_PUBLIC_BACKEND_URL`: The URL of the FastAPI backend.
+
+Sensitive variables should not be exposed directly in the frontend.
+
+## Production Considerations
+
+For production deployments, environment variables should be configured directly in the hosting environment (e.g., server settings, container orchestration secrets) rather than relying on a `.env` file. Sensitive variables should be loaded from a secure secrets management system.

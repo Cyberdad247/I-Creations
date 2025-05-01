@@ -11,7 +11,8 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:ci": "jest --ci --coverage --maxWorkers=2",
-    "test:clear": "jest --clearCache"
+    "test:clear": "jest --clearCache",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@headlessui/react": "^2.2.2",

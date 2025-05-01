@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+sqlalchemy
+databases
+psycopg2-binary
+python-jose[cryptography]
+passlib[bcrypt]
+python-dotenv
+pydantic-settings
+pytest
+pytest-asyncio
+httpx
+flake8
+pylint
+black

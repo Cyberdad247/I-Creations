@@ -1,4 +1,4 @@
-    import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getAgents } from '../../services/agentService';
 import { Agent } from '../../types/agent';
 
@@ -30,13 +30,11 @@ const AgentListPage: React.FC = () => {
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Agent List</h1>
       <div className="space-y-4">
-        {agents.map(agent => (
+        {agents.map((agent) => (
           <div key={agent.id} className="p-4 border rounded">
             <h2 className="text-xl font-semibold">{agent.name}</h2>
             <p className="text-gray-600">{agent.description}</p>
-            <div className="text-sm text-gray-500 mt-2">
-              Created: {agent.createdAt}
-            </div>
+            <div className="text-sm text-gray-500 mt-2">Created: {agent.createdAt}</div>
           </div>
         ))}
       </div>

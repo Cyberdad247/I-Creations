@@ -1,29 +1,33 @@
-import jwt from 'jsonwebtoken'
-import UserModel from '@models/UserModel'
+import axios from 'axios';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'dev-secret-change-in-production'
-const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || 'dev-refresh-secret'
+const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-export const generateToken = (userId: string) => {
-  return jwt.sign({ userId }, JWT_SECRET, { expiresIn: '15m' })
-}
+export const login = async (username, password) => {
+  const response = await axios.post(`${API_URL}/auth/token`, new URLSearchParams({
+    username: username,
+    password: password,
+  }));
+  const { access_token } = response.data;
+  localStorage.setItem('token', access_token);
+  return access_token;
+};
 
-export const generateRefreshToken = (userId: string) => {
-  return jwt.sign({ userId }, JWT_REFRESH_SECRET, { expiresIn: '7d' })
-}
+export const register = async (username, password) => {
+  const response = await axios.post(`${API_URL}/auth/register`, {
+    username: username,
+    password: password,
+  });
+  return response.data;
+};
 
-export const verifyToken = (token: string) => {
-  return jwt.verify(token, JWT_SECRET)
-}
+export const getToken = () => {
+  return localStorage.getItem('token');
+};
 
-export const verifyRefreshToken = (token: string) => {
-  return jwt.verify(token, JWT_REFRESH_SECRET)
-}
+export const logout = () => {
+  localStorage.removeItem('token');
+};
 
-export const authenticateUser = async (email: string, password: string) => {
-  const user = await UserModel.findOne({ email })
-  if (!user || !(await user.comparePassword(password))) {
-    throw new Error('Invalid credentials')
-  }
-  return generateToken(user.id)
-}
+export const isAuthenticated = () => {
+  return !!getToken();
+};

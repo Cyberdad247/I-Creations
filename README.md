@@ -17,12 +17,18 @@ A comprehensive Agent Creation Ecosystem for building, managing, and orchestrati
 ---
 
 ## Overview
-I-Creations is a full-stack platform for:
+I-Creations is a comprehensive Agent Creation Ecosystem built as a monorepo. It provides a full-stack platform for:
 - Creating and customizing AI agents (personas, skills, roles)
 - Orchestrating agents via a Super Agent engine
 - Integrating with multiple AI frameworks (Manus AI, Monica AI, LangChain, OpenAI, etc.)
 - Managing projects, tasks, and agent workflows
 - Visualizing and interacting with agents via a modern Next.js web UI
+
+The project is structured as a monorepo containing:
+- **`backend/fastapi`**: The FastAPI-based backend API.
+- **`frontend`**: The Next.js web user interface.
+- **`docs`**: Documentation files.
+- Other supporting directories and files.
 
 ---
 
@@ -49,28 +55,64 @@ The following frontend pages are connected:
 - `/agent-settings` - Update agent settings (**pending**)
 ---
 
-### Local Development
+### Local Development Setup
+To set up the project for local development, follow these steps:
+
 1. **Clone the repository:**
    ```sh
    git clone https://github.com/yourusername/i-creations.git
    cd i-creations
    ```
-2. **Install dependencies:**
+
+2. **Set up Environment Variables:**
+   Copy the example environment file and update it with your settings. Refer to `env.md` for detailed information on required variables.
    ```sh
+   cp .env.example .env
+   # Edit .env with your specific configurations
+   ```
+
+3. **Install Backend Dependencies:**
+   Navigate to the backend directory and install the Python dependencies.
+   ```sh
+   cd backend/fastapi
+   pip install -r requirements.txt
+   ```
+
+4. **Run Backend Migrations (if applicable):**
+   If your database requires migrations (e.g., with SQLAlchemy), run them. (Note: Specific migration commands depend on the chosen ORM and setup, e.g., Alembic).
+   ```sh
+   # Example using Alembic (adjust if using a different tool)
+   # alembic upgrade head
+   ```
+
+5. **Start the Backend Server:**
+   Run the FastAPI development server.
+   ```sh
+   uvicorn main:app --reload
+   ```
+   The backend should now be running, typically at `http://localhost:8000`.
+
+6. **Install Frontend Dependencies:**
+   Open a new terminal, navigate to the frontend directory, and install the Node.js dependencies.
+   ```sh
+   cd frontend
    npm install
    ```
-3. **Start the development server:**
+
+7. **Start the Frontend Development Server:**
+   Run the Next.js development server.
    ```sh
    npm run dev
    ```
-4. **Build for production:**
-   ```sh
-   npm run build && npm start
-   ```
+   The frontend should now be running, typically at `http://localhost:3000`.
+
+### Running Tests
+Instructions for running tests will be added here.
 
 ### Deployment
-- **Vercel:** Deploy directly with Vercel for serverless hosting.
-- **Custom Server:** Use Node.js hosting for custom deployments.
+- **Vercel:** Deploy the `frontend` directory directly with Vercel for serverless hosting.
+- **Custom Server:** Use Node.js hosting for custom frontend deployments.
+- **Backend Deployment:** The FastAPI backend can be deployed using various methods, such as uvicorn with Gunicorn, Docker, or cloud-specific services (e.g., Heroku, AWS Elastic Beanstalk).
 - **MCP Server Integration:** See [Adding MCP Servers](#adding-mcp-servers).
 
 ---
