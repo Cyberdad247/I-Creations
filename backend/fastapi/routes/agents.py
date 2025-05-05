@@ -5,9 +5,27 @@ from backend.fastapi.models import AgentModel, UserModel
 from backend.fastapi.database import get_db
 from backend.fastapi.auth import get_current_active_user
 from backend.fastapi.agent_executor import AgentExecutor
-from backend.fastapi.schemas import Agent, AgentCreate
+from backend.fastapi.schemas import Agent, AgentCreate, NaturalLanguageQuery
 
 router = APIRouter(prefix="/agents", tags=["agents"])
+
+@router.post("/create_from_query")
+async def create_agent_from_query(query: NaturalLanguageQuery, db: Session = Depends(get_db), current_user: UserModel = Depends(get_current_active_user)) -> Agent:
+    # Placeholder for natural language query processing
+    # In a real implementation, this would involve calling an NLP model
+    # to interpret the query and extract agent parameters.
+    print(f"Received natural language query: {query.query}")
+
+    # Placeholder for mapping query intent to agent configuration
+    # This is a simplified example; a real implementation would be more complex
+    # and likely involve looking up templates or using a configuration generator.
+    agent_config = AgentCreate(
+        name=f"Agent from query: {query.query[:20]}...",
+        description=f"Created from natural language query: {query.query}"
+    )
+
+    # Utilize the existing agent creation logic
+    return await create_agent(agent=agent_config, db=db, current_user=current_user)
 
 @router.get("/")
 async def get_agents(db: Session = Depends(get_db), current_user: UserModel = Depends(get_current_active_user)) -> List[Agent]:

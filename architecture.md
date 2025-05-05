@@ -6,6 +6,7 @@ This document outlines the architecture for a comprehensive Agent Creation Platf
 
 ## Core Design Principles
 
+
 1. **User-Centric Design**: Intuitive interface accessible to both technical and non-technical users
 2. **Modularity**: Composable components that can be mixed and matched
 3. **Extensibility**: Easy integration with external tools and services
@@ -19,18 +20,21 @@ The platform follows a modern microservices architecture with the following key 
 
 ### 1. Frontend Layer
 
-- **Agent Designer UI**: React-based interface for creating and configuring agents
-- **Agent Testing Playground**: Interactive environment for testing agent behavior
+- **Agent Visual Builder**: React-based interface for creating and configuring agents using a drag and drop method.
+- **Agent Sandbox**:
+  - It will provide a sandbox environment for testing agents in simulated environments.
+  - It will include pre-defined scenarios for different agent types (e.g. e-commerce chatbot, coding assistant).
+  - It will have browser based simulations for testing interactions.
+  - API endpoints will be available for programatic interactions.
+  - This component will integrate with the Agent Testing Playground for performance evaluation.
+- **Agent Testing Playground**: Interactive environment for testing agent behavior. Now it will also support sandbox features and it will have real world test cases and metrics for performance evaluation.
 - **Monitoring Dashboard**: Real-time metrics and logs for deployed agents
 - **User Management Portal**: Account management and access control
 
 ### 2. Backend Layer
-
-- **Agent Orchestration Service**: Manages agent lifecycle and execution
-- **Knowledge Base**: Stores agent configurations, templates, and shared resources
-- **Learning Engine**: Analyzes agent performance and suggests improvements
-- **Error Correction System**: Identifies and resolves issues in agent behavior
-- **Failsafe Controller**: Monitors agent operations and enforces safety constraints
+- **Sandbox Environment Management**: 
+  - This new service will manage the sandbox configuration, start and stop the sandbox, update the scenario and define the API endpoints.
+  - **Agent Orchestration Service**: Manages agent lifecycle and execution
 
 ### 3. Integration Layer
 
@@ -43,10 +47,13 @@ The platform follows a modern microservices architecture with the following key 
 
 - **Performance Analyzer**: Evaluates agent effectiveness across various metrics
 - **Behavior Optimizer**: Suggests improvements to agent configurations
-- **Knowledge Distillation**: Extracts reusable patterns from successful agents
-- **Meta-Learning Module**: Improves the platform itself based on usage patterns
+- **Agent Orchestration Service**: Manages agent lifecycle and execution
+- **Knowledge Base**: Stores agent configurations, templates, and shared resources
+- **Learning Engine**: Analyzes agent performance and suggests improvements
+- **Error Correction System**: Identifies and resolves issues in agent behavior
+- **Failsafe Controller**: Monitors agent operations and enforces safety constraints
 
-## Key Features
+### 3. Integration Layer
 
 ### Agent Creation and Management
 

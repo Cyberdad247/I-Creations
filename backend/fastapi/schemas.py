@@ -64,6 +64,9 @@ class Agent(AgentBase):
 
     model_config = ConfigDict(from_attributes=True)
 
+class NaturalLanguageQuery(BaseModel):
+    query: str
+
 class Settings(BaseModel):
     provider_name: str
     api_key: str

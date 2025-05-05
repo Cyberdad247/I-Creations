@@ -53,10 +53,18 @@ This document summarizes the research on Firebase Studio capabilities for integr
 - Implement real-time synchronization for collaborative agent development
 - Use offline capabilities for better user experience
 
+### 3. Agent Visual Builder Integration
+- The Agent Visual Builder will use a drag and drop interface to allow users to define the flow of the agent.
+- The drag and drop will be composed of draggable components like input/output nodes, API connectors and tools.
+- The workflows generated in this visual builder will be stored and retrieved using the firebase real time database or firestore.
+
 ### 3. AI Capabilities Enhancement
-- Integrate Gemini AI with existing Manus AI and Monica AI capabilities
+- Integrate Gemini AI with existing Manus AI and Monica AI capabilities.
+- This drag-and-drop tool will be used as a more efficient way to connect Manus AI, Monica AI and Gemini AI.
 - Use App Prototyping agent for rapid development of new agent interfaces
 - Leverage multimodal prompts for enhanced agent interactions
+
+
 
 ### 4. Hosting and Deployment
 - Deploy the Creation AI Ecosystem using Firebase App Hosting
@@ -70,9 +78,14 @@ This document summarizes the research on Firebase Studio capabilities for integr
 
 ## Next Steps
 1. Design a comprehensive Firebase integration architecture
-2. Implement Firebase Authentication for user management
-3. Migrate data storage to Firebase database solutions
-4. Configure Firebase hosting for deployment
-5. Update existing code for Firebase compatibility
-6. Test the integrated system
-7. Deploy the enhanced Creation AI Ecosystem
+2. Design the data structure for the visual builder workflows in firebase
+3. Implement Firebase Authentication for user management
+4. Migrate data storage to Firebase database solutions
+5. Configure Firebase hosting for deployment
+6. Implement the Agent Visual Builder using React/Next.js
+7. Implement the error checking and validation of the workflows
+8. Implement the integration of the visual builder with the firebase real time database/firestore
+9. Update existing code for Firebase compatibility
+10. Test the agent visual builder integration
+11. Test the integrated system
+12. Deploy the enhanced Creation AI Ecosystem

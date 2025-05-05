@@ -1,0 +1,8 @@
+{
+  "name": "Coding Assistant Scenario",
+  "description": "A basic scenario for a coding assistant, where the user is given a task and interacts with a code editor.",
+  "initial_state": {
+    "code_editor": "",
+    "current_task": "Write a python function that sums two numbers."
+  }
+}

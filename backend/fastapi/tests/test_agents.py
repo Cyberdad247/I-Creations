@@ -133,6 +133,18 @@ def test_delete_agent_not_found():
     assert delete_response.status_code == 404
     assert delete_response.json() == {"detail": "Agent not found"}
 
+def test_create_agent_from_query():
+    query_text = "Create a coding assistant using GPT-4"
+    response = client.post(
+        "/agents/create_from_query",
+        json={"query": query_text},
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert "id" in data
+    assert data["name"].startswith("Agent from query:")
+    assert data["description"] == f"Created from natural language query: {query_text}"
+
 @pytest.mark.asyncio
 async def test_execute_agent_endpoint():
     # Create a dummy agent in the test database

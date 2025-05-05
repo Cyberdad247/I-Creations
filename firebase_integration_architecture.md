@@ -15,12 +15,18 @@ This document outlines the architecture for integrating Firebase Studio with the
 │  │ Agent     │    │ Project   │    │ Orchestration     │    │
 │  │ Definition│    │ Management│    │ Engine            │    │
 │  └─────┬─────┘    └─────┬─────┘    └─────────┬─────────┘    │
-│        │                │                    │              │
-│        └────────────────┼────────────────────┘              │
-│                         │                                   │
-│                         ▼                                   │
+│        │                │                    │            │
+│        │                │                    │            │
+│        └────────────────┼────────────────────┘            │
+│                         │                                 │
+│                         ▼                                 │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │                Agent Visual Builder                 │  │
+│  └────────┬────────────────────────────────────────────┘  │
+│           │                                              │
+│           ▼                                              │
 │  ┌─────────────────────────────────────────────────────┐    │
-│  │                Firebase Integration Layer            │    │
+│  │           Firebase Integration Layer                │    │
 │  └─────────────────────────────────────────────────────┘    │
 │        │                │                    │              │
 │        ▼                ▼                    ▼              │
@@ -48,7 +54,7 @@ This document outlines the architecture for integrating Firebase Studio with the
 
 ### 2. Integration Layer
 
-The Firebase Integration Layer will serve as the bridge between the Creation AI Ecosystem and Firebase Studio services. This layer will:
+The Firebase Integration Layer will serve as the bridge between the Creation AI Ecosystem, the Agent Visual Builder and Firebase Studio services. This layer will:
 
 - Handle authentication state management
 - Provide data adapters for database operations
@@ -216,7 +222,18 @@ We will use **Cloud Firestore** as our primary database for the following reason
 - Set up CI/CD pipeline
 - Implement multi-environment strategy
 
-### Phase 4: AI Integration
+### Phase 3: Agent Visual Builder Implementation
+- Implement the Agent Visual Builder using React/Next.js
+- Implement the error checking and validation of the workflows
+- Design and implement the data structure for the visual builder workflows in firebase
+- Implement the integration of the visual builder with the firebase real time database/firestore
+- Test the agent visual builder integration
+
+### Phase 4: Hosting Configuration
+- Configure Firebase Hosting
+- Set up CI/CD pipeline
+- Implement multi-environment strategy
+### Phase 5: AI Integration
 - Integrate Gemini AI with existing AI services
 - Implement AI orchestration layer
 - Update Super Agent to leverage new capabilities

@@ -1,0 +1,24 @@
+{
+  "name": "Basic E-commerce Scenario",
+  "description": "A basic e-commerce scenario where the user can browse products and add them to a cart.",
+  "initial_state": {
+    "cart": [],
+    "products": [
+      {
+        "name": "T-Shirt",
+        "description": "Comfortable cotton T-shirt.",
+        "price": 19.99
+      },
+      {
+        "name": "Jeans",
+        "description": "Classic denim jeans.",
+        "price": 49.99
+      },
+      {
+        "name": "Sneakers",
+        "description": "Stylish and comfortable sneakers.",
+        "price": 79.99
+      }
+    ]
+  }
+}
