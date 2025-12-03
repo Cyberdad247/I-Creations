@@ -26,7 +26,7 @@
     "genkitx-mcp": "^1.7.0",
     "langchain": "^0.3.23",
     "mongoose": "^8.13.2",
-    "next": "^15.3.1",
+    "next": "^15.4.8",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.56.0",
